@@ -1,14 +1,13 @@
 import logo from './logo.svg';
 import './App.scss';
+import Header from './component/Header/Header';
 
 function App() {
   return (
     <div className="home">
-      <header className="home-header">
-        <h1 className="home-header_title">The HomeWorld</h1>
-      </header>
+      <Header />
       <main className="home-main">
-        <form className="home-main-form" >
+        <form className="home-main-form">
           <label className="home-main-form_label" >
             Material Deck
             <textarea className="home-main-form_textarea" name="mat_deck"></textarea>  
@@ -21,6 +20,7 @@ function App() {
             Side Deck
             <textarea className="home-main-form_textarea" name="side_deck"></textarea>  
           </label>
+          <button type='submit'>Submit</button>
         </form>
       </main>
     </div>
