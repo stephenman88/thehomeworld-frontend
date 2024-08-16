@@ -4,8 +4,8 @@ function Header(){
     
 
     return(
-    <header className="home-header">
-        <h1 className="home-header_title">The HomeWorld</h1>
+    <header className="header">
+        <h1 className="header_title">The HomeWorld</h1>
       </header>)
 }
 
