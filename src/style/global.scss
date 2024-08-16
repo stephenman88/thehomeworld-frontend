@@ -1,6 +1,35 @@
 
+$tablet: 768px;
+$laptop-small: 1024px;
+$laptop-large: 1440px;
+$fourk: 2560px;
+
 $background-light: rgba(38, 50, 56, 0.95);
 $background-dark: rgba(0, 0, 0, 0.4);
+
+@mixin tablet{
+    @media (min-width: $tablet) {
+        @content
+    }
+};
+
+@mixin laptop-small{
+    @media (min-width: $laptop-small) {
+        @content
+    }
+};
+
+@mixin laptop-large{
+    @media (min-width: $laptop-large){
+        @content
+    }
+};
+
+@mixin fourk{
+    @media (min-width: $fourk){
+        @content
+    }
+}
 
 *{
     padding: 0;
@@ -14,6 +43,6 @@ body{
     background-color: $background-light;
 }
   
-  ul{
+ul{
     list-style-type: none;
-  }
+}
