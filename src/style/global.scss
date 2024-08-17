@@ -6,6 +6,7 @@ $fourk: 2560px;
 
 $background-light: rgba(38, 50, 56, 0.95);
 $background-dark: rgba(0, 0, 0, 0.4);
+$background-dark-transparent: rgba(0, 0, 0, 0.2);
 
 @mixin tablet{
     @media (min-width: $tablet) {
@@ -37,12 +38,39 @@ $background-dark: rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
     text-decoration: none;
     color: white;
-  }
+
+    @include fourk{
+        font-size: 1.3rem;
+    }
+}
+
+html{
+    min-height: 100%;
+}
 
 body{
     background-color: $background-light;
+    height: 100%;
+    width: 100%;
 }
   
 ul{
     list-style-type: none;
+}
+
+button{
+    background-color: $background-light;
+    box-shadow: none;
+    border: 1px white solid;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+
+    &:hover{
+        border: 2px white solid;
+        background-color: $background-dark;
+    }
+}
+
+.page-boundaries{
+    padding: 0 1rem;
 }

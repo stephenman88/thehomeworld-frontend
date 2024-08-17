@@ -1,1 +1,10 @@
 @use './style/global.scss' as *;
+
+.home{
+
+  &-main{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
