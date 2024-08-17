@@ -42,9 +42,14 @@ function OmniForm({onSubmit, onCancel}){
         }
     }
 
+    function onSubmitClicked(event){
+        onSubmit(event, matDeckState, mainDeckState, sideDeckState)
+        event.preventDefault();
+    }
+
     return(
         <div className='omniform page-boundaries'>
-            <form className="omniform-form" onSubmit={(e) => onSubmit(e)}>
+            <form className="omniform-form" onSubmit={(e) => onSubmitClicked(e)}>
                 <h3 className='omniform_title'>Put your decklist here in Omnidex Format</h3>
                 <div className='omniform-form-inputarea'>
                     <div className='omniform-form-inputarea-inputset'>
@@ -61,7 +66,7 @@ function OmniForm({onSubmit, onCancel}){
                     </div>
                 </div>
                 <div className='omniform-form-buttons'>
-                    <button className='omniform-form-buttons_submit' type='submit'>Submit</button>
+                    <button className='omniform-form-buttons_submit' type='submit'>OK</button>
                     <button className='omniform-form-buttons_cancel' onClick={(e) => onCancel(e)}>Cancel</button>
                 </div>
             </form>
