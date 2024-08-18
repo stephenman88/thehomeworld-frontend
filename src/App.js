@@ -1,28 +1,63 @@
 import logo from './logo.svg';
 import './App.scss';
+import Header from './component/Header/Header';
+import OmniForm from './component/OmniForm/OmniForm';
+import {useEffect, useState} from 'react';
+import axios from 'axios';
+import PriceTable from './component/PriceTable/PriceTable';
 
 function App() {
+  const [isOmniFormVisible, setIsOmniFormVisible] = useState(true)
+  const [deckList, setDeckList] = useState(null)
+
+  function onOmniFormSubmitted(event, matDeckString, mainDeckString, sideDeckString){
+    (async () => {
+      matDeckString = matDeckString.split('\n').join('$$$$$')
+      mainDeckString = mainDeckString.split('\n').join('$$$$$')
+      sideDeckString = sideDeckString.split('\n').join('$$$$$')
+      const urlString = `${process.env.REACT_APP_BACKEND_URL}/api/decklist?mat_deck=${matDeckString}&main_deck=${mainDeckString}&side_deck=${sideDeckString}`
+      try{
+        const response = await axios.get(urlString)
+        const tempCardList = []
+            
+            if(response.data['mat_deck']){
+                for (let i = 0; i < response.data['mat_deck'].length; i++){
+                    tempCardList.push(response.data['mat_deck'][i])
+                }
+            }
+            if(response.data['main_deck']){
+                for (let i = 0; i < response.data['main_deck'].length; i++){
+                    tempCardList.push(response.data['main_deck'][i])
+                }
+            }
+            if(response.data['side_deck']){
+                for (let i = 0; i < response.data['side_deck'].length; i++){
+                    tempCardList.push(response.data['side_deck'][i])
+                }
+            }
+        setDeckList(tempCardList)
+        setIsOmniFormVisible(false)
+      }catch(exception){
+        console.error(exception)
+      }
+    })()
+  }
+  function onOmniFormCancelled(){
+    setIsOmniFormVisible(false)
+  }
+  function showOmniForm(){setIsOmniFormVisible(true)}
+
   return (
     <div className="home">
-      <header className="home-header">
-        <h1 className="home-header_title">The HomeWorld</h1>
-      </header>
-      <main className="home-main">
-        <form className="home-main-form" >
-          <label className="home-main-form_label" >
-            Material Deck
-            <textarea className="home-main-form_textarea" name="mat_deck"></textarea>  
-          </label>
-          <label className="home-main-form_label" >
-            Main Deck
-            <textarea className="home-main-form_textarea" name="main_deck"></textarea>  
-          </label>
-          <label className="home-main-form_label" >
-            Side Deck
-            <textarea className="home-main-form_textarea" name="side_deck"></textarea>  
-          </label>
-        </form>
+      <Header />
+      {isOmniFormVisible ? <OmniForm onSubmit={onOmniFormSubmitted} onCancel={onOmniFormCancelled}/> : ''}
+      <main className="home-main page-boundaries">
+        <button onClick={showOmniForm}>Click here to enter your decklist.</button>
+        {deckList ? <PriceTable DeckJson={deckList} />: ''}
       </main>
+      <footer className='home-footer'>
+        Grand Archive and all card images on this page is copyright © Weebs of the Shore.
+      </footer>
     </div>
   );
 }

@@ -1,0 +1,68 @@
+@use '../../style/global.scss' as *;
+
+.omniform{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $background-dark;
+
+    &-form{
+        background-color: $background-light;
+        margin-top: 10vh;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 10px;
+        gap: 1rem;
+        
+        @include tablet{
+            max-width: 80%;
+            margin-left:auto;
+            margin-right:auto;
+            padding: 1.5rem 2rem;
+        }
+
+        @include laptop-small{
+            max-width: 70%;
+            padding: 1.6rem 2.2rem;
+        }
+
+        @include laptop-large{
+            max-width: 60%;
+            padding: 1.75rem 2.5rem;
+        }
+
+        @include fourk{
+            padding: 2rem 2.75rem;
+        }
+
+        &-inputarea{
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.5rem;
+
+            &-inputset{
+                display: flex;
+                flex-direction: column;
+                
+                @include tablet{
+                    gap: 0.3rem;
+                }
+
+                &_textarea{
+                    background-color: $background-dark;
+                    border-radius: 5px;
+                }
+            }
+        }
+    
+        &-buttons{
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+    }
+}
