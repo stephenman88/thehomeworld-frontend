@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.scss';
 import Header from './component/Header/Header';
+import Footer from './component/Footer/Footer';
 import OmniForm from './component/OmniForm/OmniForm';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
@@ -8,7 +9,7 @@ import PriceTable from './component/PriceTable/PriceTable';
 
 function App() {
   const [isOmniFormVisible, setIsOmniFormVisible] = useState(true)
-  const [deckList, setDeckList] = useState(null)
+  const [deckList, setDeckList] = useState([])
 
   function onOmniFormSubmitted(event, matDeckString, mainDeckString, sideDeckString){
     (async () => {
@@ -53,11 +54,9 @@ function App() {
       {isOmniFormVisible ? <OmniForm onSubmit={onOmniFormSubmitted} onCancel={onOmniFormCancelled}/> : ''}
       <main className="home-main page-boundaries">
         <button onClick={showOmniForm}>Click here to enter your decklist.</button>
-        {deckList ? <PriceTable DeckJson={deckList} />: ''}
+        {deckList ? <PriceTable key={deckList} cardList={deckList} />: ''}
       </main>
-      <footer className='home-footer'>
-        Grand Archive and all card images on this page is copyright © Weebs of the Shore.
-      </footer>
+      <Footer />
     </div>
   );
 }

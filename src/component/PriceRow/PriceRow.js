@@ -46,7 +46,7 @@ export default function PriceRow({isColumnTitle, card, setLowPriceState, setMark
             }else{
                 if(edition['tcg_low_foil'] && edition['tcg_low_nonfoil']){
                     if(edition['tcg_low_nonfoil'] <= edition['tcg_low_foil']){
-                        if (lowestPriceCard['price'] && lowestPriceCard['price'] > edition['tcg_low_nonfoil']){
+                        if (!lowestPriceCard['price'] || lowestPriceCard['price'] > edition['tcg_low_nonfoil']){
                             lowestPriceCard['card'] = edition;
                             lowestPriceCard['index'] = index;
                             lowestPriceCard['isFoilCheaper'] = false
@@ -54,7 +54,7 @@ export default function PriceRow({isColumnTitle, card, setLowPriceState, setMark
                             lowestPriceCard['market_price'] = edition['tcg_market_nonfoil']
                         }
                     }else{
-                        if (lowestPriceCard['price'] && lowestPriceCard['price'] > edition['tcg_low_foil']){
+                        if (!lowestPriceCard['price'] || lowestPriceCard['price'] > edition['tcg_low_foil']){
                             lowestPriceCard['card'] = edition;
                             lowestPriceCard['index'] = index;
                             lowestPriceCard['isFoilCheaper'] = true
@@ -63,7 +63,7 @@ export default function PriceRow({isColumnTitle, card, setLowPriceState, setMark
                         }
                     }
                 }else if(edition['tcg_low_foil']){
-                    if (lowestPriceCard['price'] && lowestPriceCard['price'] > edition['tcg_low_foil']){
+                    if (!lowestPriceCard['price'] || lowestPriceCard['price'] > edition['tcg_low_foil']){
                         lowestPriceCard['card'] = edition;
                         lowestPriceCard['index'] = index;
                         lowestPriceCard['isFoilCheaper'] = true
@@ -71,7 +71,7 @@ export default function PriceRow({isColumnTitle, card, setLowPriceState, setMark
                         lowestPriceCard['market_price'] = edition['tcg_market_foil']
                     }
                 }else if (edition['tcg_low_nonfoil']){
-                    if (lowestPriceCard['price'] && lowestPriceCard['price'] > edition['tcg_low_nonfoil']){
+                    if (!lowestPriceCard['price'] || lowestPriceCard['price'] > edition['tcg_low_nonfoil']){
                         lowestPriceCard['card'] = edition;
                         lowestPriceCard['index'] = index;
                         lowestPriceCard['isFoilCheaper'] = false
@@ -92,10 +92,10 @@ export default function PriceRow({isColumnTitle, card, setLowPriceState, setMark
             'identity': identity,
             'price': lowestPriceCard['price']
         });
-        setMarketPriceState(setMarketPriceState({
+        setMarketPriceState({
             'identity': identity,
             'price': lowestPriceCard['market_price']
-        }));
+        });
     }
     
 
@@ -115,12 +115,14 @@ export default function PriceRow({isColumnTitle, card, setLowPriceState, setMark
         if(newEdition){
             if(isFoilViewing){
                 if(newEdition['tcg_low_foil'] )
-                    {setLowPriceState({
+                    {
+                        setLowPriceState({
                         'identity': identity,
                         'price': newEdition['tcg_low_foil']
                     })}
                 if(newEdition['tcg_market_foil'] )
-                    {setMarketPriceState({
+                    {
+                        setMarketPriceState({
                         'identity': identity,
                         'price': newEdition['tcg_market_foil']
                     })}
