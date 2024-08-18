@@ -44,6 +44,23 @@ $background-dark-transparent: rgba(0, 0, 0, 0.2);
     }
 }
 
+img{
+    width: 100%;
+    vertical-align: middle;
+    border-style: none;
+    object-fit: contain;
+}
+
+hr{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    @include fourk{
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
 html{
     min-height: 100%;
 }
@@ -58,19 +75,163 @@ ul{
     list-style-type: none;
 }
 
-button{
+select{
+    background-color: $background-dark;
+}
+
+button, select{
     background-color: $background-light;
     box-shadow: none;
     border: 1px white solid;
     border-radius: 10px;
     padding: 0.5rem 1rem;
+}
 
-    &:hover{
-        border: 2px white solid;
-        background-color: $background-dark;
-    }
+button:hover{
+    border: 2px white solid;
+    padding: calc(0.5rem - 1px) calc(1rem - 1px);
+    background-color: $background-dark;
 }
 
 .page-boundaries{
     padding: 0 1rem;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.col{
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+
+    &-span-1{
+        @extend .col;
+        @include tablet{   
+            flex: 0 0 6.666667%;
+            max-width: 6.666667%;
+        }
+    }
+
+    &-span-2{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 13.333333%;
+            max-width: 13.333333%;
+        }
+    }
+
+    &-span-3{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 20%;
+            max-width: 20%;
+        }
+    }
+
+    &-span-4{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 26.666667%;
+            max-width: 26.666667%;
+        }
+    }
+
+    &-span-5{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+        }
+    }
+
+    &-span-6{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 40%;
+            max-width: 40%;
+        }
+    }
+
+    &-span-7{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 46.666667%;
+            max-width: 46.666667%;
+        }
+    }
+
+    &-span-8{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 53.333333%;
+            max-width: 53.333333%;
+        }
+    }
+
+    &-span-9{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 60%;
+            max-width: 60%;
+        }
+    }
+
+    &-span-10{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 66.666667%;
+            max-width: 66.666667%;
+        }
+    }
+
+    &-span-11{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 73.333333%;
+            max-width: 73.333333%;
+        }
+    }
+
+    &-span-12{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 80%;
+            max-width: 80%;
+        }
+    }
+
+    &-span-13{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 86.666667%;
+            max-width: 86.666667%;
+        }
+    }
+
+    &-span-14{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 93.333333%;
+            max-width: 93.333333%;
+        }
+    }
+
+    &-span-15{
+        @extend .col;
+        @include tablet{
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+    }
+}
+
+.mobile-only{
+    @media (min-width: 768px) {
+        display: none;
+    }
 }
