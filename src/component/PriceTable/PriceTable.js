@@ -6,42 +6,18 @@ import {v4} from 'uuid'
 export default function PriceTable({DeckJson}){
     const[lowPrices, setLowPrices] = useState([])
     const[marketPrices, setMarketPrices] = useState([])
-    const[cardList, setCardList] = useState([])
-
-    useEffect(() => {
-        if(DeckJson){
-            const tempCardList = []
-            
-            if(DeckJson['mat_deck']){
-                for (let i = 0; i < DeckJson['mat_deck'].length; i++){
-                    tempCardList.push(DeckJson['mat_deck'][i])
-                }
-            }
-            if(DeckJson['main_deck']){
-                for (let i = 0; i < DeckJson['main_deck'].length; i++){
-                    tempCardList.push(DeckJson['main_deck'][i])
-                }
-            }
-            if(DeckJson['side_deck']){
-                for (let i = 0; i < DeckJson['side_deck'].length; i++){
-                    tempCardList.push(DeckJson['side_deck'][i])
-                }
-            }
-            setCardList(tempCardList)
-        }
-    })
+    const[cardList, setCardList] = useState(DeckJson)
 
     function setLowPriceState(identityPriceObject){
-        const existingIndex = lowPrices.findIndex(object => {
-            if(!object || !object['identity']){return false;}
+        let oldLows =Object.assign([], lowPrices)
+        const existingIndex = oldLows.findIndex(object => {
             return object['identity'] === identityPriceObject['identity']
         })
-        if(existingIndex < 0){
-            lowPrices.splice(existingIndex)
+        if(existingIndex >= 0){
+            oldLows.splice(existingIndex)
         }
-        lowPrices.push(identityPriceObject)
-        const newLows = Object.assign([], lowPrices)
-        setLowPrices(newLows)
+        oldLows.push(identityPriceObject)
+        setLowPrices(oldLows)
     }
 
     function setMarketPriceState(identityPriceObject){
@@ -69,7 +45,7 @@ export default function PriceTable({DeckJson}){
             <div className='pricetable-table'>
                 <PriceRow isColumnTitle={true} card={null} setLowPriceState={setLowPriceState} setMarketPriceState={setMarketPriceState} identity={v4()}/>
                 {cardList.map((card, index)=>{
-                    return (<PriceRow isColumnTitle={false} card={card} setLowPriceState={setLowPriceState} setMarketPriceState={setMarketPriceState} identity={v4()}/>)
+                    return (<PriceRow isColumnTitle={false} card={card} setLowPriceState={setLowPriceState} setMarketPriceState={setMarketPriceState} identity={index}/>)
                 })}
                 <div className='pricetable-table-total'>
                     <div className='pricetable-table-total_label'>Total:</div>

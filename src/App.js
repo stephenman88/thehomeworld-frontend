@@ -18,8 +18,24 @@ function App() {
       const urlString = `${process.env.REACT_APP_BACKEND_URL}/api/decklist?mat_deck=${matDeckString}&main_deck=${mainDeckString}&side_deck=${sideDeckString}`
       try{
         const response = await axios.get(urlString)
-        console.log(response.data)
-        setDeckList(response.data)
+        const tempCardList = []
+            
+            if(response.data['mat_deck']){
+                for (let i = 0; i < response.data['mat_deck'].length; i++){
+                    tempCardList.push(response.data['mat_deck'][i])
+                }
+            }
+            if(response.data['main_deck']){
+                for (let i = 0; i < response.data['main_deck'].length; i++){
+                    tempCardList.push(response.data['main_deck'][i])
+                }
+            }
+            if(response.data['side_deck']){
+                for (let i = 0; i < response.data['side_deck'].length; i++){
+                    tempCardList.push(response.data['side_deck'][i])
+                }
+            }
+        setDeckList(tempCardList)
         setIsOmniFormVisible(false)
       }catch(exception){
         console.error(exception)

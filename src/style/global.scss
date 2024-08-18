@@ -58,6 +58,10 @@ ul{
     list-style-type: none;
 }
 
+select{
+    background-color: $background-dark;
+}
+
 button{
     background-color: $background-light;
     box-shadow: none;
