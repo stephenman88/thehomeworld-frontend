@@ -1,1 +1,16 @@
 @use '../../style/global.scss' as *;
+
+.pricetable{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    &-table{
+        &-total{
+            display: flex;
+            flex-wrap: wrap;
+
+            &_divider{
+                width: 100%;
+            }
+        }
+    }
+}

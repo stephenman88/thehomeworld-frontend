@@ -150,32 +150,36 @@ export default function PriceRow({isColumnTitle, card, setLowPriceState, setMark
 
     return(
         <div className='pricerow row'>
-            <div className='col-span-15'><hr className='pricerow_seperator'/></div>
-            <div className='col-span-5'>
-                <span className='lineitem'><img alt={activeEdition['slug']/*.split('-').map(word => {
+            <div className='pricerow-line col-span-15'><hr className='pricerow_seperator'/></div>
+            <div className='pricerow-card-container col-span-5'>
+                <span className='pricerow-card-container-span lineitem'><img className='pricerow-card-container_image' alt={activeEdition['slug']/*.split('-').map(word => {
                     if(word.toLowerCase() == 'cur'){return 'CUR'}
                     if(word.toLowerCase() == 'csr'){return 'CSR'}
                     return word[0].toUpperCase() + word.slice(1).toLowerCase();
                 }).join(' ')*/} src={`${process.env.REACT_APP_INDEX_IMAGE_BASE_URL}${activeEdition.slug}.jpg`}/></span>
-                <span className='lineitem'>{cardMain['name']}</span>
+                <span className='pricerow-card-container_name lineitem' >{cardMain['name']}</span>
             </div>
-            <div className='col-span-3'>
-                <select name='is_foil' onChange={(e)=>{setIsFoilViewing(e.target.value === "foil"); relayCurrentPrices(activeEdition)}} defaultValue={isFoilViewing ? "foil" : "nonfoil"}>
+            <div className='pricerow-card-container col-span-3'>
+                <select className='pricerow-card-container_foil' name='is_foil' onChange={(e)=>{setIsFoilViewing(e.target.value === "foil"); relayCurrentPrices(activeEdition)}} defaultValue={isFoilViewing ? "foil" : "nonfoil"}>
                     <option value="foil">Foil</option>
                     <option value="nonfoil">Nonfoil</option>
                 </select>
             </div>
-            <div className='col-span-3'>
-                <select name='version_selected' onChange={(e) => {onEditionSelected(e)}} defaultValue={activeEditionIndex}>
+            <div className='pricerow-card-container col-span-3'>
+                <select className='pricerow-card-container_edition' name='version_selected' onChange={(e) => {onEditionSelected(e)}} defaultValue={activeEditionIndex}>
                     {editions.map((edition, index) => {
                         return (<option value={index}>{edition.set_name}</option>)
                     })}
                 </select>
             </div>
-            <div className='col-span-2'>{isFoilViewing ?
+            <div className='pricerow-card-container_low col-span-2'>
+            <span className='mobile-only'>TCG Lowest Price: </span>
+                {isFoilViewing ?
             (activeEdition['tcg_low_foil'] ? activeEdition['tcg_low_foil'] : "Could not find TCGPlayer Low") : 
             (activeEdition['tcg_low_nonfoil'] ? activeEdition['tcg_low_nonfoil'] : "Could not find TCGPlayer Low")}</div>
-            <div className='col-span-2'>{isFoilViewing ? 
+            <div className='pricerow-card-container_market col-span-2'>
+                <span className='mobile-only'>TCG Market Price: </span>
+                {isFoilViewing ? 
                 (activeEdition['tcg_market_foil'] ? activeEdition['tcg_market_foil'] : "Could not find TCGPlayer Market Price") : 
                 (activeEdition['tcg_market_nonfoil'] ? activeEdition['tcg_market_nonfoil'] : "Could not find TCGPlayer Market Price")}</div>
         </div>

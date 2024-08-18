@@ -55,6 +55,9 @@ function App() {
         <button onClick={showOmniForm}>Click here to enter your decklist.</button>
         {deckList ? <PriceTable DeckJson={deckList} />: ''}
       </main>
+      <footer className='home-footer'>
+        Grand Archive and all card images on this page is copyright © Weebs of the Shore.
+      </footer>
     </div>
   );
 }

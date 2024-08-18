@@ -48,9 +48,11 @@ export default function PriceTable({DeckJson}){
                     return (<PriceRow isColumnTitle={false} card={card} setLowPriceState={setLowPriceState} setMarketPriceState={setMarketPriceState} identity={index}/>)
                 })}
                 <div className='pricetable-table-total'>
-                    <div className='pricetable-table-total_label'>Total:</div>
-                    <div className='pricetable-table-total_low'>{calculateTotal(lowPrices)}</div>
-                    <div className='pricetable-table-total_market'>{calculateTotal(marketPrices)}</div>
+                    <div className='pricetable-table-total_divider'><hr/></div>
+                    <div className='pricetable-table-total_filler col-span-8'></div>
+                    <div className='pricetable-table-total_label col-span-3'>Total:</div>
+                    <div className='pricetable-table-total_low col-span-2'>{calculateTotal(lowPrices)}</div>
+                    <div className='pricetable-table-total_market col-span-2'>{calculateTotal(marketPrices)}</div>
                 </div>
             </div>
         </div>

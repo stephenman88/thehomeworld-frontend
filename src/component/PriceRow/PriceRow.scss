@@ -1,1 +1,49 @@
 @use '../../style/global.scss' as *;
+
+.pricerow{
+    &-card{
+        &-container{
+            &-span{
+                width: 50px;
+                height: 70px;
+                display: inline-block;
+
+                @include laptop-large{
+                    width: 100px;
+                    height: 140px;
+                }
+
+                @include fourk{
+                    width: 150px;
+                    height: 210px;
+                }
+            }
+
+            &_name{
+                display: inline-block;
+                vertical-align: center;
+                text-align: left;
+                padding-left: 25px;
+            }
+
+            &_foil, &_edition{
+                display: inline-block;
+                width: 100%;
+            }
+
+            &_low, &_market{
+                @extend .pricerow-card-container;
+                @include tablet{
+                    align-self: center;
+                }
+            }
+        }
+    }
+
+    &--title{
+        margin-top: 1rem;
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+}

@@ -44,6 +44,23 @@ $background-dark-transparent: rgba(0, 0, 0, 0.2);
     }
 }
 
+img{
+    width: 100%;
+    vertical-align: middle;
+    border-style: none;
+    object-fit: contain;
+}
+
+hr{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    @include fourk{
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
 html{
     min-height: 100%;
 }
@@ -62,17 +79,18 @@ select{
     background-color: $background-dark;
 }
 
-button{
+button, select{
     background-color: $background-light;
     box-shadow: none;
     border: 1px white solid;
     border-radius: 10px;
     padding: 0.5rem 1rem;
+}
 
-    &:hover{
-        border: 2px white solid;
-        background-color: $background-dark;
-    }
+button:hover{
+    border: 2px white solid;
+    padding: calc(0.5rem - 1px) calc(1rem - 1px);
+    background-color: $background-dark;
 }
 
 .page-boundaries{
@@ -82,11 +100,14 @@ button{
 .row{
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .col{
     position: relative;
     width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
 
     &-span-1{
         @extend .col;
@@ -206,5 +227,11 @@ button{
             flex: 0 0 100%;
             max-width: 100%;
         }
+    }
+}
+
+.mobile-only{
+    @media (min-width: 768px) {
+        display: none;
     }
 }
