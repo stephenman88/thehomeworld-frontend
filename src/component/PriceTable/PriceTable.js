@@ -3,10 +3,9 @@ import PriceRow from '../PriceRow/PriceRow'
 import {useEffect, useState} from 'react'
 import {v4} from 'uuid'
 
-export default function PriceTable({DeckJson}){
+export default function PriceTable({cardList}){
     const[lowPrices, setLowPrices] = useState([])
     const[marketPrices, setMarketPrices] = useState([])
-    const[cardList, setCardList] = useState(DeckJson)
 
     function setLowPriceState(identityPriceObject){
         let oldLows =Object.assign([], lowPrices)
@@ -21,13 +20,15 @@ export default function PriceTable({DeckJson}){
     }
 
     function setMarketPriceState(identityPriceObject){
-        const existingIndex = marketPrices.findIndex(object => {
-            if(!object || !object['identity']){return false;}
+        let oldLows =Object.assign([], marketPrices)
+        const existingIndex = oldLows.findIndex(object => {
             return object['identity'] === identityPriceObject['identity']
         })
-        if(existingIndex < 0){marketPrices.splice(existingIndex)}
-        const newMarket = Object.assign([], marketPrices)
-        setMarketPrices(newMarket)
+        if(existingIndex >= 0){
+            oldLows.splice(existingIndex)
+        }
+        oldLows.push(identityPriceObject)
+        setMarketPrices(oldLows)
     }
 
     function calculateTotal(priceStateList){
