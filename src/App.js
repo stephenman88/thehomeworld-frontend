@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.scss';
 import Header from './component/Header/Header';
+import Footer from './component/Footer/Footer';
 import OmniForm from './component/OmniForm/OmniForm';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
@@ -55,9 +56,7 @@ function App() {
         <button onClick={showOmniForm}>Click here to enter your decklist.</button>
         {deckList ? <PriceTable DeckJson={deckList} />: ''}
       </main>
-      <footer className='home-footer'>
-        Grand Archive and all card images on this page is copyright © Weebs of the Shore.
-      </footer>
+      <Footer />
     </div>
   );
 }

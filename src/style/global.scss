@@ -61,13 +61,12 @@ hr{
     }
 }
 
-html{
-    min-height: 100%;
+html, body, #root{
+    height: 100%;
 }
 
 body{
     background-color: $background-light;
-    height: 100%;
     width: 100%;
 }
   
