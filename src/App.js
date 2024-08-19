@@ -9,7 +9,7 @@ import PriceTable from './component/PriceTable/PriceTable';
 
 function App() {
   const [isOmniFormVisible, setIsOmniFormVisible] = useState(true)
-  const [deckList, setDeckList] = useState(null)
+  const [deckList, setDeckList] = useState([])
 
   function onOmniFormSubmitted(event, matDeckString, mainDeckString, sideDeckString){
     (async () => {
@@ -54,7 +54,7 @@ function App() {
       {isOmniFormVisible ? <OmniForm onSubmit={onOmniFormSubmitted} onCancel={onOmniFormCancelled}/> : ''}
       <main className="home-main page-boundaries">
         <button onClick={showOmniForm}>Click here to enter your decklist.</button>
-        {deckList ? <PriceTable DeckJson={deckList} />: ''}
+        {deckList ? <PriceTable key={deckList} cardList={deckList} />: ''}
       </main>
       <Footer />
     </div>
